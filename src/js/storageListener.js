@@ -3,7 +3,17 @@ function storageUpdated( changes, areaName ) {
 		return;
 	}
 
-	console.log( id, changes );
+	var localKey = 'history-' + id;
+
+	for ( var key in changes ) {
+		if ( localKey === key ) {
+			continue;
+		}
+
+		if ( key.startsWith( 'history-' ) ) {
+			console.log( key, changes[ key ].newValue );
+		}
+	}
 }
 
 chrome.storage.onChanged.addListener( storageUpdated );
