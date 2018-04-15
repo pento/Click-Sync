@@ -8,7 +8,10 @@
 	},
 
 	"background": {
-		"scripts": [ "js/historyListener.js" ],
+		"scripts": [
+			"js/historyListener.js",
+			"js/storageListener.js"
+		],
 		"persistent": false
 	},
 
