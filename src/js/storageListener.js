@@ -11,7 +11,19 @@ function storageUpdated( changes, areaName ) {
 		}
 
 		if ( key.startsWith( 'history-' ) ) {
-			console.log( key, changes[ key ].newValue );
+			changes[ key ].newValue.forEach( function ( url )  {
+				if ( ! url ) {
+					return;
+				}
+
+				chrome.history.getVisits( { url: url }, function ( visits ) {
+					if ( visits.length > 0 ) {
+						return;
+					}
+
+					chrome.history.addUrl( { url: url } );
+				} );
+			} );
 		}
 	}
 }
