@@ -47,8 +47,6 @@ function storageUpdated( changes, areaName ) {
 
 				chrome.storage.sync.set( { devices: devices } );
 			} );
-		} else {
-			console.log( key, changes[ key ].newValue );
 		}
 	}
 }
