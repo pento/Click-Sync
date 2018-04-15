@@ -29,7 +29,7 @@ function createLocalId() {
 }
 
 function historyVisited( visit ) {
-	if ( visit.vistedCount > 1 ) {
+	if ( visit.visitCount > 1 ) {
 		return;
 	}
 
