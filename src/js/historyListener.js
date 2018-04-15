@@ -28,10 +28,24 @@ function createLocalId() {
 	chrome.storage.local.set( { id: id } );
 }
 
-function historyVisited( result ) {
-	if ( result.vistedCount > 1 ) {
+function historyVisited( visit ) {
+	if ( visit.vistedCount > 1 ) {
 		return;
 	}
+
+	chrome.storage.sync.get( 'history-' + id, function ( result ) {
+		var history = result[ 'history-' + id ];
+		if( typeof history !== 'object' ) {
+			history = [];
+		}
+
+		history.push( visit.url );
+
+		var data = {};
+		data[ 'history-' + id ] = history;
+
+		chrome.storage.sync.set( data );
+	} );
 }
 
 chrome.history.onVisited.addListener( historyVisited );
