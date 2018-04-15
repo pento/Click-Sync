@@ -74,7 +74,7 @@ function storageUpdated( changes, areaName ) {
 				console.log( history );
 
 				var syncedUrlLocations = syncedUrls.map( function( url ) {
-					return history.findIndex( url );
+					return history.indexOf( url );
 				} );
 
 				var oldestSyncedUrl = syncedUrlLocations.reduce( function( oldest, current ) {
