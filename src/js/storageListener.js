@@ -73,8 +73,6 @@ function storageUpdated( changes, areaName ) {
 				return;
 			}
 
-			console.log( history );
-
 			var syncedUrlLocations = syncedUrls.map( function( url ) {
 				return history.indexOf( url );
 			} );
@@ -90,7 +88,6 @@ function storageUpdated( changes, areaName ) {
 
 				return current;
 			}, -1 );
-			console.log( oldestSyncedUrl );
 
 			if ( oldestSyncedUrl < 0 ) {
 				return;
