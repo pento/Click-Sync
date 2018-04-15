@@ -48,6 +48,59 @@ function storageUpdated( changes, areaName ) {
 				chrome.storage.sync.set( { devices: devices } );
 			} );
 		}
+
+		if ( 'devices' === key ) {
+			var syncedUrls = [];
+
+			for ( var deviceId in changes[ key ].newValue ) {
+				if ( deviceId === id ) {
+					continue;
+				}
+
+				var syncedUrl = changes[ key ].newValue[ deviceId ].synced[ id ];
+				if ( ! syncedUrl ) {
+					continue;
+				}
+
+				syncedUrls.push( syncedUrl );
+			}
+
+			chrome.storage.sync.get( localKey, function( value ) {
+				var history = value[ localKey ];
+				if ( typeof history !== 'object' ) {
+					return;
+				}
+
+				console.log( history );
+
+				var syncedUrlLocations = syncedUrls.map( function( url ) {
+					return history.findIndex( url );
+				} );
+
+				var oldestSyncedUrl = syncedUrlLocations.reduce( function( oldest, current ) {
+					if ( -1 === oldest ) {
+						return current;
+					}
+
+					if ( current > oldest ) {
+						return oldest;
+					}
+
+					return current;
+				}, -1 );
+
+				if ( oldestSyncedUrl < 0 ) {
+					return;
+				}
+
+				var unsyncedHistory = history.slice( oldestSyncedUrl );
+
+				var data = {};
+				data[ localKey ] = unsyncedHistory;
+
+				chrome.storage.sync.set( data );
+			} );
+		}
 	}
 }
 
