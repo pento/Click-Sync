@@ -43,6 +43,10 @@ function storageUpdated( changes, areaName ) {
 					device = {};
 				}
 
+				if ( typeof device.synced !== 'object' ) {
+					device.synced = {};
+				}
+
 				device.synced[ syncingId ] = lastSynced;
 
 				var data = {};
