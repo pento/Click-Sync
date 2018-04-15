@@ -39,10 +39,6 @@ function historyVisited( visit ) {
 			history = [];
 		}
 
-		if ( history.length > 10 ) {
-			history = history.slice( -10 );
-		}
-
 		history.push( visit.url );
 
 		var data = {};
