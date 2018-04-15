@@ -1,0 +1,20 @@
+{
+	"manifest_version": 2,
+	"name": "Link Sync",
+	"version": "0.1",
+
+	"description": "Syncs your 'visited' link status between Chrome installs.",
+	"icons": {
+	},
+
+	"background": {
+		"scripts": [ "js/historyListener.js" ],
+		"persistent": false
+	},
+
+	"permissions": [
+		"history",
+		"storage",
+		"unlimitedStorage"
+	]
+}
