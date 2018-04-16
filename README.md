@@ -1,4 +1,4 @@
-# Link Sync
+# Click Sync
 
 Syncs the "visited" status of URLs between Chrome installs on different computers.
 
