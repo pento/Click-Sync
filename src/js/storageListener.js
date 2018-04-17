@@ -59,9 +59,11 @@ function storageUpdated( changes, areaName ) {
 		if ( key.startsWith( 'device-' ) ) {
 			var deviceId = key.replace( 'device-', '' );
 
-			var syncedUrl = changes[ key ].newValue.synced[ id ];
-			if ( syncedUrl ) {
-				syncedUrls.push( syncedUrl );
+			if ( changes[ key ].newValue && changes[ key ].newValue.synced ) {
+				var syncedUrl = changes[ key ].newValue.synced[ id ];
+				if ( syncedUrl ) {
+					syncedUrls.push( syncedUrl );
+				}
 			}
 		}
 	}
